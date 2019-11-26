@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <!--当子组件的内容要根据父组件内容进行html显示的时候-->
+    <div id="app">
+        <!--<child content="<p>dell</p>"></child>-->
+        <child>
+            <p slot="header">header</p>
+            <p>dell</p>
+            <p slot="footer">footer</p>
+        </child>
+    </div>
+    <script>
+        //Vue.component('child', {
+        //    props:['content'],
+        //    template: `<div>
+        //                     <p>hello</p>
+        //                     <p v-html='this.content'></p>
+        //                   </div>`
+        //});
+        Vue.component('child', {
+            props: ['content'],
+            template: `<div>
+                            <slot name='header'></slot>
+                             <p>hello</p>
+                               <slot></slot>
+                             <slot name='footer'>默认内容</slot>
+                           </div>`
+        });
+        var vm = new Vue({
+            el: '#app',
+
+        });
+    </script>
+</body>
+</html>

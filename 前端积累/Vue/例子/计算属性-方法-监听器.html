@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>{{firstName +" " + secondName}}</div>
+        <div>{{fullName}}</div>
+        <div>{{fullNames()}}</div>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                firstName: "luoyi",
+                secondName: "yi"
+            },
+            //计算属性(内置缓存,firstName和secondName变量值变的才会重新计算。依赖值变了才重新计算)
+            computed: {
+                fullName: function () {
+                    return this.firstName + " " + this.secondName;
+                }
+            },
+            //使用方法计算（不如计算属性，没有缓存）
+            methods: {
+                fullNames: function () {
+                    return this.firstName + " " + this.secondName;
+                }
+            },
+            watch: {
+                firstName: function () {
+                  
+                }
+            }
+        })
+    </script>
+</body>
+</html>

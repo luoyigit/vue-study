@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <!--实现兄弟组件传值-->
+    <div id="app">
+        <child content="dell"></child>
+        <child content="li"></child>
+    </div>
+
+    <script>
+
+        //通过总线解决
+        Vue.prototype.bus = new Vue();
+
+        Vue.component('child', {
+            props: {
+                content: String
+            },
+            data: function () {
+                return {
+                    selftContent: this.content
+                }
+            },
+            template: "<div @click='handleClick'>{{selftContent}}</div>",
+            methods: {
+                handleClick: function () {
+                    this.bus.$emit('change', this.selftContent);
+                }
+            },
+            mounted: function () {
+                var _this = this;
+                this.bus.$on('change', function (msg) {
+                    _this.selftContent = msg;
+                });
+            }
+        });
+        var vm = new Vue({
+            el: '#app',
+
+        });
+    </script>
+</body>
+</html>

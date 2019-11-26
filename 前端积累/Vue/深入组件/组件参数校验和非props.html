@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--<child content="hello world" ></child>-->
+        <!--<child :content="123"></child>-->
+        <child content="hell"></child>
+
+        <!--非props:父组件传，子组件不接，使用场景不多-->
+        <child x="hell"></child>
+    </div>
+    <script>
+        var child = {
+            //props: ['content'],
+            props: {
+                //content: String //校验
+                //content: Number
+                //content: [String, Number]
+                content: {
+                    type: String,
+                    required: true, //是否必填
+                    default: "default value",//默认值，
+                    //validator: function (value) {
+                    //    return value.lenght > 5;
+                    //}
+                }
+            },
+            template: "<div >{{content}}</div>",
+            methods: {
+                handleClick: function () {
+                    this.number++;
+                    this.$emit('change', 1);
+                }
+            }
+        }
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                total:0
+            },
+            components: {
+                child: child
+            },
+            methods: {
+                hangdleChange: function (step) {
+                    this.total += step;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

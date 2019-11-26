@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--父组件传个子组件通过属性得方式-->
+        <!--子组件向父组件传值通过事件-->
+        <!--加了冒号就是数字了，因为是js表达式-->
+        <counter :count="0" @change="hangdleChange"></counter>
+        <counter :count="0" @change="hangdleChange"></counter>
+        <div>{{total}}</div>
+    </div>
+    <script>
+        var counter = {
+            props:['count'],
+            template: "<div @click='handleClick'>{{number}}</div>",
+            data: function () {
+                return {
+                    number: this.count,//主组件属性副本
+                }
+            },
+            methods: {
+                handleClick: function () {
+                    this.number++;
+                    this.$emit('change', 1);
+                }
+            }
+        }
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                total:0
+            },
+            components: {
+                counter: counter
+            },
+            methods: {
+                hangdleChange: function (step) {
+                    this.total += step;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

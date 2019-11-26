@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <style>
+        .activated{
+            color:red;
+        }
+        .activated-one{
+            font-weight:900;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--class的对象绑定-->
+        <div @click="handleClick"
+             :class="{activated : isActivated }">{{name}}</div><!--activated样式是否出现取决于isActivated变量的值-->
+
+        <div @click="handleClick2"
+             :class="[ActivatedArr,Activated2]">{{name}}</div>
+
+        <div @click="handleClick2"
+             :style="styleObj">{{name}}</div>
+
+        <div @click="handleClick2"
+             :style="[styleObj,{fontSize:'20px'}]">{{name}}</div>
+
+        <!--<div @click="handleClick2"
+    :class="[activated : isActivated,Activated2]">{{name}}</div>-->
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                name: "hello",
+                isActivated: false,
+                ActivatedArr: "",
+                Activated2: "activated-one",
+                styleObj: {
+                    color:"blue"
+                }
+            },
+            methods: {
+                handleClick: function () {
+                    this.isActivated = !this.isActivated;
+                },
+                handleClick2: function () {
+                    this.ActivatedArr = "activated";
+                }
+            }
+        })
+    </script>
+</body>
+</html>

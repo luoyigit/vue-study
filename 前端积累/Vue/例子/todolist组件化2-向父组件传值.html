@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputvalue" />
+        <button v-on:click="addTodo">提交</button>
+        <ul>
+            <!--<li v-for="item in list">{{item}}</li>-->
+            <!--v-bind绑定中间变量-->
+            <todo-item
+                       v-bind:content ="item" 
+                       v-bind:index="index"
+                       v-on:delete="handItemDelete"
+                       v-for="(item,index) in list"></todo-item>
+        </ul>
+    </div>
+    <script>
+        //局部组件
+        var TodoItem2 = {
+            props: ['content','index'],//定义接受中间变量
+            template: " <li v-on:click='handItemClick' >{{ content }}</li>",
+            methods: {
+                handItemClick: function () {
+                    this.$emit("delete",this.index);//向外触发事件
+                }
+            }
+        }
+
+        var app = new Vue({
+            el: '#app',
+            components: {
+                TodoItem: TodoItem2
+            },
+            data: {
+                list: [],
+                inputvalue:''
+            },
+            methods: {
+                addTodo: function () {
+                    this.list.push(this.inputvalue);
+                    this.inputvalue = '';
+                },
+                handItemDelete: function (index) {
+                    this.list.splice(index, 1);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

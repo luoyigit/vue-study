@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <!---->
+    <div id="app">
+        <table>
+            <tbody>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        Vue.component('row', {
+            //data: {//非根组件不能定义data
+            //    content: "this is a row"
+            //},
+            data: function () {//只能用函数返回,原理是每个子组件都应该有自己的数据，不做共享
+                return {
+                    content:"this is a row"
+                }
+            },
+            template:'<tr><td>{{content}}</td></tr>'
+        })
+        var vm = new Vue({
+            el: '#app',
+           
+        });
+    </script>
+</body>
+</html>

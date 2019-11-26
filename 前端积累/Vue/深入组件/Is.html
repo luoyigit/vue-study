@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <!--is 解决标签渲染中出现的小bug:有些浏览器可能要求tbody里面一定有tr-->
+    <div id="app">
+        <table>
+            <tbody>
+                <!--<row></row>-->
+                <!--<row></row>
+    <row></row>-->
+                <tr is="row"></tr>
+                <tr is="row"></tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+        Vue.component('row', {
+            template:'<tr><td>this is a row</td></tr>'
+        })
+        var vm = new Vue({
+          el:'#app'
+        });
+    </script>
+</body>
+</html>

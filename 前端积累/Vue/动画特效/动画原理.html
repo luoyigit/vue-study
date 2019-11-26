@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <style>
+       /*fade开头对应，也可以用v开头*/
+        .fade-leave-to,
+        .fade-enter {
+            opacity: 0
+        }
+        .fade-leave-active,
+        .fade-enter-active {
+            transition: opacity 2s
+        }
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition name="fade">
+            <div v-if="show">hello world</div>
+        </transition>
+        <button @click="handleClick">切换</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                show: true
+            },
+            methods: {
+                handleClick: function () {
+                    this.show = !this.show;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
